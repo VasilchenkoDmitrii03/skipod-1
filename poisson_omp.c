@@ -3,7 +3,7 @@
  * Один и тот же файл: без флага OpenMP (-qsmp=omp / -fopenmp) собирается
  * последовательная версия, с флагом — многопоточная
  *
- * Запуск: ./prog M N [delta] [файл_решения]
+ * Запуск: ./prog_omp M N [delta] [файл_решения]
  */
 #include <stdio.h>
 #include <stdlib.h>

@@ -13,7 +13,7 @@
 #include <omp.h>
 #endif
 
-// Текущее время в секундах (источник разный для seq и OpenMP)
+// Текущее время в секундах
 static double wtime(void)
 {
 #ifdef _OPENMP
@@ -88,8 +88,7 @@ int main(int argc, char **argv)
             if (i == 0 || i == M || j == 0 || j == N) {
                 w[ID(i, j)] = phi(x, y);
             } else {
-                double S = cell_area(x - 0.5 * h1, x + 0.5 * h1,
-                                     y - 0.5 * h2, y + 0.5 * h2);
+                double S = cell_area(x - 0.5 * h1, x + 0.5 * h1, y - 0.5 * h2, y + 0.5 * h2);
                 double q = (1.0 - S / hh) * inv_eps2;
                 Q[ID(i, j)] = q;
                 B[ID(i, j)] = S / hh * f_rhs(x, y) + q * phi(x, y);
@@ -170,7 +169,7 @@ int main(int argc, char **argv)
     t1 = wtime();
 
     {
-        // Контрольные величины — чтобы сверять версии между собой
+        // Контрольные величины для сверяки верси1 между собой
         double sum = 0.0, wmax = -1e300;
 #ifdef CHECK_EXACT
         double err = 0.0;
@@ -201,7 +200,7 @@ int main(int argc, char **argv)
         printf("\n");
     }
 
-    // По запросу выгружаем решение: строки "x y w(x,y)" по всем узлам
+    // Выгрузка по запрсоу
     if (out) {
         FILE *fp = fopen(out, "w");
         if (fp) {

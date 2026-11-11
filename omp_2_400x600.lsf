@@ -3,4 +3,5 @@
 #BSUB -o "omp_2_400x600.%J.out"
 #BSUB -e "omp_2_400x600.%J.err"
 #BSUB -R "affinity[core(2)]"
+export OMP_NUM_THREADS=2
 /polusfs/lsf/openmp/launchOpenMP.py ./prog_omp 400 600

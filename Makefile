@@ -1,11 +1,11 @@
 prog_omp: poisson_omp.c problem.h
-	xlc_r -O3 -qsmp=omp -qarch=pwr8 poisson_omp.c -o prog_omp -lm
+	xlc_r -O1 -qsmp=omp -qarch=pwr8 poisson_omp.c -o prog_omp -lm
 
 upload:
 	scp poisson_omp.c problem.h Makefile omp_*.lsf polus:~/skmodel/
 
 local:
-	gcc -O2 -Wno-unknown-pragmas poisson_omp.c -o prog -lm
+	gcc -O1 -Wno-unknown-pragmas poisson_omp.c -o prog -lm
 	./prog 20 20
 	./prog 40 40
 	./prog 80 80
